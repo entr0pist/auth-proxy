@@ -1,0 +1,26 @@
+html
+    head
+        link(rel="stylesheet", href="/auth-proxy/static/js/bootstrap-3.3.5-dist/css/bootstrap.min.css")
+        link(rel="stylesheet", href="/auth-proxy/static/js/bootstrap-3.3.5-dist/css/bootstrap-theme.min.css")
+        link(rel="stylesheet", href="/auth-proxy/static/js/style.css")
+
+        title SSL Client Certificate Registration Gateway
+
+    body
+        .container
+            .page-header
+                h3
+                    | Enter a username, download the&nbsp;
+                    a(href="/ca.crt") CA certificate
+                    | , refresh the page.
+
+            form.form-horizontal(method="post", action="/auth-proxy/api/csr")
+                keygen(name="csr", hidden="true")
+
+                .form-group
+                    label.col-sm-2.control-label Username
+
+                    .col-sm-10
+                        input.form-control(type="text", name="username")
+
+                input(type="submit", hidden="true")

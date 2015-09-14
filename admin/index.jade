@@ -1,0 +1,46 @@
+html(ng-app='AdminApp')
+    head
+        title Admin
+
+        link(rel="stylesheet", href="/auth-proxy/admin/js/bootstrap-3.3.5-dist/css/bootstrap.min.css")
+        link(rel="stylesheet", href="/auth-proxy/admin/js/bootstrap-3.3.5-dist/css/bootstrap-theme.min.css")
+        link(rel="stylesheet", href="/auth-proxy/admin/js/ng-tags-input.min.css")
+        link(rel="stylesheet", href="/auth-proxy/admin/js/ng-tags-input.bootstrap.min.css")
+
+        link(rel="stylesheet", href="/auth-proxy/admin/js/style.css")
+
+        script(src="/auth-proxy/admin/js/jquery.min.js")
+        script(src="/auth-proxy/admin/js/angular.min.js")
+        script(src="/auth-proxy/admin/js/bootstrap-3.3.5-dist/js/bootstrap.min.js")
+        script(src="/auth-proxy/admin/js/ui-bootstrap-tpls-0.13.0.min.js")
+        script(src="/auth-proxy/admin/js/ng-tags-input.min.js")
+
+        script(src="/auth-proxy/admin/js/admin.js")
+
+    body(ng-controller='AdminController')
+        .container
+            .page-header
+                h3
+                    | Administration interface.
+
+            form.form-horizontal
+                .form-group
+                    label.col-sm-2.control-label Default policy
+
+                    .col-sm-10
+                        select.form-control(ng-model='policy', ng-change='change_policy()')
+                            option(value='allow') allow
+                            option(value='deny') deny
+
+            form.form-horizontal
+                .form-group.heading-group
+                    label.col-sm-2.control-label Username
+                    label.col-sm-10.control-label.heading Groups
+
+                hr
+
+                .form-group(ng-repeat="user in users")
+                    label.col-sm-2.control-label {{ user.username }}
+
+                    .tags.col-sm-10
+                        tags-input(ng-model="tags[user.username]", on-tag-added="tag_added(user.username, $tag)", on-tag-removed="tag_removed(user.username, $tag)")
