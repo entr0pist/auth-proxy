@@ -1,7 +1,7 @@
 angular.module('AdminApp', [ 'ngTagsInput', 'ui.bootstrap' ]).controller('AdminController', function($scope, $http) {
     $scope.tags = {};
 
-    $scope.hostname = window.location.hostname.replace(/\./, '-');
+    $scope.hostname = window.location.hostname.replace(/\./g, '-');
 
     $scope.parse_groups = function(user) {
         if(!$scope.tags[user.username]) {

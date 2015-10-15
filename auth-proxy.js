@@ -222,7 +222,7 @@ app.use(function(req, res, next) {
     }
 
     req.headers['x-ap-certificate'] = parse_cert(req.headers['x-ap-certificate']);
-    req.auth_host = req.headers['x-ap-host'].replace(/\./, '-');
+    req.auth_host = req.headers['x-ap-host'].replace(/\./g, '-');
 
     get_username(req.headers['x-ap-certificate']).then(get_user).then(function(user) {
         req.user = user;
@@ -330,7 +330,7 @@ function forward(req, res) {
 }
 
 app.use('/auth-proxy/admin', function(req, res, next) {
-    req.auth_host = req.headers['x-ap-host'].replace(/\./, '-');
+    req.auth_host = req.headers['x-ap-host'].replace(/\./g, '-');
 
     req.site_admin = privs(req.user, req.auth_host, 'admin');
     req.net_admin = privs(req.user, 'auth-proxy', 'admin');
